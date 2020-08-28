@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import Navbar from "./components/Navbar";
 import { getArticles } from "./api";
 import LatestNews from "./components/Latestnews";
 import ArticleList from "./components/articleList";
@@ -19,10 +20,11 @@ class App extends React.Component {
     try {
       this.setState({ loading: true });
       const response = await getArticles(topic);
+      console.log(response);
       this.setState({
-        articles: response.articles,
+        articles: response.news,
         searchTopic: topic,
-        totalResults: response.totalResults,
+        totalResults: response.news.length,
       });
     } catch (error) {
       this.setState({ apiError: "Could not find any articles" });
@@ -40,13 +42,7 @@ class App extends React.Component {
     } = this.state;
     return (
       <div>
-        <header>
-          <div className='topnav'>
-            <a className='active' href='#home'>The News Inquirer</a>
-            <a href='#home'>Home</a>
-            <a href='#searchtopic'>Search Topic</a>
-          </div>
-        </header>
+        <Navbar />
         <LatestNews />
         <hr />
         <Container id='searchtopic'>
@@ -55,7 +51,8 @@ class App extends React.Component {
           </Header>
           <SearchBar searchForTopic={this.searchForTopic} />
           <p style={{ textAlign: "center" }}>
-            Powered by <a href='https://newsapi.org/'>NewsAPI.org</a>
+            Powered by{" "}
+            <a href='https://currentsapi.services/'>currentsapi.services</a>
           </p>
           {loading && (
             <p style={{ textAlign: "center" }}>Searching for articles...</p>

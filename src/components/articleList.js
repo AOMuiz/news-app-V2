@@ -19,13 +19,23 @@ const ArticleItem = (props) => {
           </List.Description>
           <List bulleted horizontal>
             <List.Item>
-              <a href={article.url}>{article.source.name}</a>
+              <a href={article.url}>{article.author}</a>
             </List.Item>
-            <List.Item>{article.publishedAt.split("T")[0]}</List.Item>
+            <List.Item>
+              {article.published.split(" ")[0]} -{" "}
+              {article.published.split(" ")[1]}
+            </List.Item>
           </List>
         </Grid.Column>
         <Grid.Column width={5}>
-          <Image src={article.urlToImage} />
+          <Image
+            src={
+              article.image === "None"
+                ? "https://worldofspectrum.org/addons/shared_addons/themes/bootstrap/img/image-not-available.png"
+                : article.image
+            }
+            alt='Not Available'
+          />
         </Grid.Column>
       </Grid>
     </List.Item>
