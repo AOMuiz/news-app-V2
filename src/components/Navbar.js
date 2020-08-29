@@ -1,16 +1,24 @@
 import React from "react";
+import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <header>
-      <div className='topnav'>
-        <a className='active' href='#home'>
-          The News Inquirer
-        </a>
-        <a href='#home'>Home</a>
-        <a href='#searchtopic'>Search Topic</a>
-      </div>
-    </header>
+    <div className='topnav'>
+      <ul>
+        <Link to='/news-app-V2'>
+          <li className='active' href='#home'>
+            The News Inquirer
+          </li>
+        </Link>
+        <Link to='/news-app-V2/latestnews'>
+          <li href='#home'>Home</li>
+        </Link>
+        <Link to='/news-app-V2/search'>
+          <li href='#searchtopic'>Search Topic</li>
+        </Link>
+      </ul>
+    </div>
   );
 }
 

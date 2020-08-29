@@ -1,12 +1,12 @@
 .text-center {
   text-align: center;
+  /* margin: 20px; */
+  color: black;
 }
-/* section h3{
-  margin: 5px;
-} */
 
-h2.text-center{
-  border: 1px solid black;
+.latestheadline {
+  margin: 0 14px;
+  padding: 14px;
 }
 
 .cards {
@@ -17,15 +17,13 @@ h2.text-center{
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-.error{
+.error {
   color: red;
   text-align: center;
-  font-size: 20px;
 }
 
 .container {
   padding: 1rem;
-  
 }
 
 .single-blog {
@@ -36,7 +34,6 @@ h2.text-center{
 }
 .single-blog img {
   width: 100%;
-  /* margin-top: 2px; */
   height: 15rem;
 }
 .blog-meta {

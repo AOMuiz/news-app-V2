@@ -31,7 +31,7 @@ class LatestNews extends Component {
       });
     } catch (error) {
       this.setState({
-        apiError: "There was an error fecthing News",
+        apiError: "There was an error fecthing News. Please try again.",
       });
       console.log(error);
     }
@@ -41,16 +41,15 @@ class LatestNews extends Component {
   render() {
     return (
       <div className='App'>
-        <div>
+        <div className='latestheadline'>
           <h1 className='text-center'>Latest Headline</h1>
           <p className='text-center'>
-            Continue Reading the Latest Headline Or Scroll Down to Search by
-            Topic.
+            Continue Reading the Latest Headline Or Search by Topic.
           </p>
         </div>
 
         {this.state.loading && (
-          <p style={{ textAlign: "center" }}>Loading Latest articles...</p>
+          <h4 style={{ textAlign: "center" }}>Loading Latest articles...</h4>
         )}
 
         {this.state.apiError === "" ? (
@@ -97,7 +96,7 @@ class LatestNews extends Component {
             ))}
           </div>
         ) : (
-          <h3>Something went wrong: {this.state.apiError}</h3>
+          <h4 className='error'>Something went wrong: {this.state.apiError}</h4>
         )}
       </div>
     );

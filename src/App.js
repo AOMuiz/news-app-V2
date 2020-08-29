@@ -1,73 +1,39 @@
-import React from "react";
-import "./App.css";
+import React, { Component } from "react";
 import Navbar from "./components/Navbar";
-import { getArticles } from "./api";
 import LatestNews from "./components/Latestnews";
-import ArticleList from "./components/articleList";
-import SearchBar from "./components/searchBar";
-import { Container, Header } from "semantic-ui-react";
+import SearchTopic from "./components/SearchTopic";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-class App extends React.Component {
-  state = {
-    articles: [],
-    searchTopic: "",
-    totalResults: "",
-    loading: false,
-    apiError: "",
-  };
-
-  searchForTopic = async (topic) => {
-    try {
-      this.setState({ loading: true });
-      const response = await getArticles(topic);
-      console.log(response);
-      this.setState({
-        articles: response.news,
-        searchTopic: topic,
-        totalResults: response.news.length,
-      });
-    } catch (error) {
-      this.setState({ apiError: "Could not find any articles" });
-    }
-    this.setState({ loading: false });
-  };
-
+class App extends Component {
   render() {
-    const {
-      articles,
-      apiError,
-      loading,
-      searchTopic,
-      totalResults,
-    } = this.state;
     return (
-      <div>
-        <Navbar />
-        <LatestNews />
-        <hr />
-        <Container id='searchtopic'>
-          <Header as='h2' style={{ textAlign: "center", margin: 20 }}>
-            Search for a topic
-          </Header>
-          <SearchBar searchForTopic={this.searchForTopic} />
-          <p style={{ textAlign: "center" }}>
-            Powered by{" "}
-            <a href='https://currentsapi.services/'>currentsapi.services</a>
-          </p>
-          {loading && (
-            <p style={{ textAlign: "center" }}>Searching for articles...</p>
-          )}
-          {articles.length > 0 && (
-            <Header as='h4' style={{ textAlign: "center", margin: 20 }}>
-              Found {totalResults} articles on "{searchTopic}"
-            </Header>
-          )}
-          {articles.length > 0 && <ArticleList articles={articles} />}
-          {apiError && <p>Could not fetch any articles. Please try again.</p>}
-        </Container>
-      </div>
+      <Router>
+        <div>
+          <Navbar />
+          <Switch>
+            <Route path='/news-app-V2' exact component={LatestNews} />
+            <Route path='/news-app-V2/latestnews' component={LatestNews} />
+            <Route path='/news-app-V2/search' component={SearchTopic} />
+          </Switch>
+          <footer className='footer-distributed'>
+            <p>
+              <a href='https://github.com/AOMuiz'>AOMuiz</a> &copy; 2020 ||
+              Created Using React and{" "}
+              <a href='https://currentsapi.services/'>Currentsapi.services</a>
+            </p>
+          </footer>
+        </div>
+      </Router>
     );
   }
+}
+
+export function Search() {
+  return (
+    <div>
+      <h1>Search page</h1>
+    </div>
+  );
 }
 
 export default App;
